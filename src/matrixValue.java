@@ -1,25 +1,25 @@
 public class matrixValue {
-    public static int gridSizeX;
-    public static int gridSizeY;
-    public static int cap;
-    public static int carryCount;
-    public static int neoPositionX;
-    public static int neoPositionY;
-    public static int telephoneX;
-    public static int telephoneY;
-    public static int[] agentsX;
-    public static int[] agentsY;
-    public static int[] pillsX;
-    public static int[] pillsY;
-    public static int[] padsX;
-    public static int[] padsY;
-    public static int[] hostagesX;
-    public static int[] hostagesY;
-    public static int[] hostagesDmg;
-    public static boolean[] hostagesCarried;
-    public static boolean[] hostageAgent;
-    public static boolean[] agentDead;
-    public static int neoDmg;
+    public int gridSizeX;
+    public int gridSizeY;
+    public int cap;
+    public int carryCount;
+    public int neoPositionX;
+    public int neoPositionY;
+    public int telephoneX;
+    public int telephoneY;
+    public int[] agentsX;
+    public int[] agentsY;
+    public int[] pillsX;
+    public int[] pillsY;
+    public int[] padsX;
+    public int[] padsY;
+    public int[] hostagesX;
+    public int[] hostagesY;
+    public int[] hostagesDmg;
+    public boolean[] hostagesCarried;
+    public boolean[] hostageAgent;
+    public boolean[] agentDead;
+    public int neoDmg;
 
     public matrixValue(String[] gridSize, String cap, String[] neoPosition, String[] telephone, String[] agents,
             String[] pills, String[] pads, String[] hostages, int neoDmg) {
@@ -36,7 +36,7 @@ public class matrixValue {
         for (int i = 0; i < agents.length; i += 2) {
             agentsX[i] = Integer.parseInt(agents[i]);
             agentsY[i] = Integer.parseInt(agents[i + 1]);
-            agentDead[i]=false;
+            agentDead[i] = false;
         }
         pillsX = new int[pills.length];
         pillsY = new int[pills.length];
@@ -60,8 +60,8 @@ public class matrixValue {
             hostagesX[i] = Integer.parseInt(hostages[i]);
             hostagesY[i] = Integer.parseInt(hostages[i + 1]);
             hostagesDmg[i] = Integer.parseInt(hostages[i + 2]);
-            hostagesCarried[i]=false;
-            hostageAgent[i]=false;
+            hostagesCarried[i] = false;
+            hostageAgent[i] = false;
 
         }
         this.neoDmg = neoDmg;
