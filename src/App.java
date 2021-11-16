@@ -449,9 +449,7 @@ public class App {
                 }
 
             }
-            for (MyTreeNode<matrixValue> myTreeNode : queue) {
-                System.out.println(myTreeNode.action);
-            }
+
         } while (hostages != 0);
         while (currentNode != null) {
             System.out.println(currentNode.action);
