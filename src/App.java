@@ -5,7 +5,6 @@ import java.util.*;
 public class App {
     public static String[] actions = { "up", "down", "left", "right", "carry", "drop", "takePill", "kill", "fly" };
     public static Queue<MyTreeNode<matrixValue>> queue;
-    public static int hostages = 0;
 
     public static String genGrid() {
         ArrayList<String> cellsTaken = new ArrayList<String>();
@@ -129,14 +128,24 @@ public class App {
         return outPutFirst + agentsString + outPutPills + padsString + outPutHostages;
     }
 
-    public static void upFunc(MyTreeNode<matrixValue> currentNode) {
-        boolean up = true;
+    public static Pair upFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
+        boolean up = false;
         matrixValue currentMatrix = currentNode.value;
-        if (currentMatrix.neoPositionY + 1 <= currentMatrix.gridSizeY) {
+        if (currentMatrix.neoPositionY + 1 < currentMatrix.gridSizeY) {
             for (int i = 0; i < currentMatrix.agentsX.length; i++) {
-                if (currentMatrix.agentsX[i] == currentMatrix.neoPositionX
-                        && currentMatrix.agentsY[i] == currentMatrix.neoPositionY + 1) {
-                    up = false;
+                if (currentMatrix.agentsX[i] != currentMatrix.neoPositionX
+                        && currentMatrix.agentsY[i] != currentMatrix.neoPositionY + 1) {
+                    up = true;
                 }
 
             }
@@ -148,24 +157,30 @@ public class App {
                     }
                 }
 
-                for (int i = 0; i < 9; i++) {
-                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                    currentNode.addChild(temp);
-                    queue.add(temp);
-                }
             }
         }
-
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(up, currentNode);
+        return balabezo;
     }
 
-    public static void downFunc(MyTreeNode<matrixValue> currentNode) {
-        boolean down = true;
+    public static Pair downFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
+        boolean down = false;
         matrixValue currentMatrix = currentNode.value;
         if (currentMatrix.neoPositionY - 1 >= 0) {
             for (int i = 0; i < currentMatrix.agentsX.length; i++) {
-                if (currentMatrix.agentsX[i] == currentMatrix.neoPositionX
-                        && currentMatrix.agentsY[i] == currentMatrix.neoPositionY - 1) {
-                    down = false;
+                if (currentMatrix.agentsX[i] != currentMatrix.neoPositionX
+                        && currentMatrix.agentsY[i] != currentMatrix.neoPositionY - 1) {
+                    down = true;
                 }
 
             }
@@ -177,24 +192,36 @@ public class App {
                     }
                 }
 
-                for (int i = 0; i < 9; i++) {
-                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                    currentNode.addChild(temp);
-                    queue.add(temp);
-                }
+                // for (int i = 0; i < 9; i++) {
+                // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+                // actions[i]);
+                // currentNode.addChild(temp);
+                // queue.add(temp);
+                // }
             }
         }
-
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(down, currentNode);
+        return balabezo;
     }
 
-    public static void leftFunc(MyTreeNode<matrixValue> currentNode) {
-        boolean left = true;
+    public static Pair leftFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
+        boolean left = false;
         matrixValue currentMatrix = currentNode.value;
         if (currentMatrix.neoPositionX - 1 >= 0) {
             for (int i = 0; i < currentMatrix.agentsX.length; i++) {
-                if (currentMatrix.agentsX[i] == currentMatrix.neoPositionX - 1
-                        && currentMatrix.agentsY[i] == currentMatrix.neoPositionY) {
-                    left = false;
+                if (currentMatrix.agentsX[i] != currentMatrix.neoPositionX - 1
+                        && currentMatrix.agentsY[i] != currentMatrix.neoPositionY) {
+                    left = true;
                 }
 
             }
@@ -206,25 +233,37 @@ public class App {
                     }
                 }
 
-                for (int i = 0; i < 9; i++) {
-                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                    currentNode.addChild(temp);
-                    queue.add(temp);
+                // for (int i = 0; i < 9; i++) {
+                // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+                // actions[i]);
+                // currentNode.addChild(temp);
+                // queue.add(temp);
+                // }
+            }
+
+        }
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(left, currentNode);
+        return balabezo;
+    }
+
+    public static Pair rightFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
                 }
             }
 
         }
-
-    }
-
-    public static void rightFunc(MyTreeNode<matrixValue> currentNode) {
-        boolean right = true;
+        boolean right = false;
         matrixValue currentMatrix = currentNode.value;
-        if (currentMatrix.neoPositionX + 1 <= currentMatrix.gridSizeX) {
+        if (currentMatrix.neoPositionX + 1 < currentMatrix.gridSizeX) {
             for (int i = 0; i < currentMatrix.agentsX.length; i++) {
-                if (currentMatrix.agentsX[i] == currentMatrix.neoPositionX + 1
-                        && currentMatrix.agentsY[i] == currentMatrix.neoPositionY) {
-                    right = false;
+                if (currentMatrix.agentsX[i] != currentMatrix.neoPositionX + 1
+                        && currentMatrix.agentsY[i] != currentMatrix.neoPositionY) {
+                    right = true;
                 }
 
             }
@@ -236,63 +275,101 @@ public class App {
                     }
                 }
 
-                for (int i = 0; i < 9; i++) {
-                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                    currentNode.addChild(temp);
-                    queue.add(temp);
-                }
+                // for (int i = 0; i < 9; i++) {
+                // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+                // actions[i]);
+                // currentNode.addChild(temp);
+                // queue.add(temp);
+                // }
 
             }
         }
-
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(right, currentNode);
+        return balabezo;
     }
 
-    public static void dropFunc(MyTreeNode<matrixValue> currentNode) {
+    public static Pair dropFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
         matrixValue currentMatrix = currentNode.value;
         boolean action = false;
+        // If the hostage returned to the telehpone booth
         for (int i = 0; i < currentMatrix.hostagesX.length; i++) {
             if (currentMatrix.hostagesCarried[i]) {
                 if (currentMatrix.neoPositionX == currentMatrix.telephoneX
                         && currentMatrix.neoPositionY == currentMatrix.telephoneY) {
                     currentMatrix.hostagesCarried[i] = false;
                     currentMatrix.carryCount--;
-                    hostages--;
+                    currentMatrix.currentHostages--;
+                    // System.out.println("drop");
                     action = true;
                 }
             }
         }
-        if (action) {
-            for (int i = 0; i < 9; i++) {
-                MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                currentNode.addChild(temp);
-                queue.add(temp);
-            }
-        }
-
+        // if (action) {
+        // for (int i = 0; i < 9; i++) {
+        // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+        // actions[i]);
+        // currentNode.addChild(temp);
+        // queue.add(temp);
+        // }
+        // }
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(action, currentNode);
+        return balabezo;
     }
 
-    public static void carryFunc(MyTreeNode<matrixValue> currentNode) {
+    public static Pair carryFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
         boolean action = false;
         matrixValue currentMatrix = currentNode.value;
         for (int i = 0; i < currentMatrix.hostagesX.length; i++) {
             if (currentMatrix.neoPositionX == currentMatrix.hostagesX[i]
                     && currentMatrix.neoPositionY == currentMatrix.hostagesY[i]
-                    && currentMatrix.carryCount < currentMatrix.cap) {
+                    && currentMatrix.carryCount < currentMatrix.cap && !currentMatrix.hostagesCarried[i]) {
                 currentMatrix.hostagesCarried[i] = true;
                 action = true;
             }
         }
-        if (action) {
-            for (int i = 0; i < 9; i++) {
-                MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                currentNode.addChild(temp);
-                queue.add(temp);
-            }
-        }
-
+        // if (action) {
+        // for (int i = 0; i < 9; i++) {
+        // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+        // actions[i]);
+        // currentNode.addChild(temp);
+        // queue.add(temp);
+        // }
+        // }
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(action, currentNode);
+        return balabezo;
     }
 
-    public static void takepillFunc(MyTreeNode<matrixValue> currentNode) {
+    public static Pair takepillFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
         matrixValue currentMatrix = currentNode.value;
         boolean action = false;
         for (int i = 0; i < currentMatrix.pillsX.length; i++) {
@@ -310,73 +387,106 @@ public class App {
                 }
             }
         }
-        if (action) {
-            for (int i = 0; i < 9; i++) {
-                MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                currentNode.addChild(temp);
-                queue.add(temp);
-            }
-        }
-
+        // if (action) {
+        // for (int i = 0; i < 9; i++) {
+        // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+        // actions[i]);
+        // currentNode.addChild(temp);
+        // queue.add(temp);
+        // }
+        // }
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(action, currentNode);
+        return balabezo;
     }
 
-    public static void killFunc(MyTreeNode<matrixValue> currentNode) {
+    public static Pair killFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
         matrixValue currentMatrix = currentNode.value;
         int x = currentMatrix.neoPositionX;
         int y = currentMatrix.neoPositionY;
         boolean action = false;
         for (int i = 0; i < currentMatrix.agentsX.length; i++) {
-            if (x == currentMatrix.agentsX[i] - 1 && y == currentMatrix.agentsY[i]) {
+            if (x == currentMatrix.agentsX[i] - 1 && y == currentMatrix.agentsY[i] && !currentMatrix.agentDead[i]) {
                 currentMatrix.agentDead[i] = true;
                 action = true;
             }
-            if (x == currentMatrix.agentsX[i] + 1 && y == currentMatrix.agentsY[i]) {
+            if (x == currentMatrix.agentsX[i] + 1 && y == currentMatrix.agentsY[i] && !currentMatrix.agentDead[i]) {
                 currentMatrix.agentDead[i] = true;
                 action = true;
             }
-            if (x == currentMatrix.agentsX[i] && y == currentMatrix.agentsY[i] - 1) {
+            if (x == currentMatrix.agentsX[i] && y == currentMatrix.agentsY[i] - 1 && !currentMatrix.agentDead[i]) {
                 currentMatrix.agentDead[i] = true;
                 action = true;
             }
-            if (x == currentMatrix.agentsX[i] && y == currentMatrix.agentsY[i] + 1) {
+            if (x == currentMatrix.agentsX[i] && y == currentMatrix.agentsY[i] + 1 && !currentMatrix.agentDead[i]) {
                 currentMatrix.agentDead[i] = true;
                 action = true;
             }
         }
         for (int i = 0; i < currentMatrix.hostageAgent.length; i++) {
-            if (currentMatrix.hostageAgent[i]) {
+            if (currentMatrix.hostageAgent[i] == true) {
                 if (x == currentMatrix.hostagesX[i] - 1 && y == currentMatrix.hostagesY[i]) {
                     currentMatrix.hostageAgent[i] = false;
-                    hostages--;
+                    currentMatrix.currentHostages--;
+                    // System.out.println("agent");
                     action = true;
                 }
                 if (x == currentMatrix.hostagesX[i] + 1 && y == currentMatrix.hostagesY[i]) {
                     currentMatrix.hostageAgent[i] = true;
-                    hostages--;
+                    currentMatrix.currentHostages--;
+                    // System.out.println("agent2");
                     action = true;
                 }
                 if (x == currentMatrix.hostagesX[i] && y == currentMatrix.hostagesY[i] - 1) {
                     currentMatrix.hostageAgent[i] = true;
-                    hostages--;
+                    currentMatrix.currentHostages--;
+                    // System.out.println("agent3");
+                    action = true;
                 }
                 if (x == currentMatrix.hostagesX[i] && y == currentMatrix.hostagesY[i] + 1) {
                     currentMatrix.hostageAgent[i] = true;
-                    hostages--;
+                    currentMatrix.currentHostages--;
+                    // System.out.println("agent4");
                     action = true;
                 }
             }
 
         }
         if (action) {
-            for (int i = 0; i < 9; i++) {
-                MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                currentNode.addChild(temp);
-                queue.add(temp);
-            }
+            currentMatrix.neoDmg += 20;
         }
+        // if (action) {
+        // for (int i = 0; i < 9; i++) {
+        // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+        // actions[i]);
+        // currentNode.addChild(temp);
+        // queue.add(temp);
+        // }
+        // }
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(action, currentNode);
+        return balabezo;
     }
 
-    public static void flyFunc(MyTreeNode<matrixValue> currentNode) {
+    public static Pair flyFunc(MyTreeNode<matrixValue> currentNode) {
+        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+            currentNode.value.hostagesDmg[i] += 2;
+            if (currentNode.value.hostagesDmg[i] >= 100) {
+                currentNode.value.hostagesDmg[i] = 100;
+                if (currentNode.value.hostagesCarried[i] == false) {
+                    currentNode.value.hostageAgent[i] = true;
+                }
+            }
+
+        }
         matrixValue currentMatrix = currentNode.value;
         boolean action = false;
         for (int i = 0; i < currentMatrix.padsX.length; i += 2) {
@@ -388,13 +498,16 @@ public class App {
 
             }
         }
-        if (action) {
-            for (int i = 0; i < 9; i++) {
-                MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix, actions[i]);
-                currentNode.addChild(temp);
-                queue.add(temp);
-            }
-        }
+        // if (action) {
+        // for (int i = 0; i < 9; i++) {
+        // MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentMatrix,
+        // actions[i]);
+        // currentNode.addChild(temp);
+        // queue.add(temp);
+        // }
+        // }
+        Pair balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(action, currentNode);
+        return balabezo;
 
     }
 
@@ -402,58 +515,107 @@ public class App {
 
         MyTreeNode<matrixValue> currentNode;
         do {
+
             currentNode = queue.remove();
-            hostages = 0;
-            for (int i = 0; i < currentNode.value.hostagesX.length; i++) {
-                if ((currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY)
-                        || currentNode.value.hostageAgent[i] == true) {
-                    hostages++;
-
-                }
-
-            }
             if (currentNode.action == "root") {
                 for (int i = 0; i < 9; i++) {
-                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(currentNode.value, actions[i]);
+                    matrixValue tempMatrix = new matrixValue(currentNode.value);
+                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(tempMatrix, actions[i]);
                     currentNode.addChild(temp);
                     queue.add(temp);
                 }
-            } else if (currentNode.action == "up") {
-                upFunc(currentNode);
-            } else if (currentNode.action == "down") {
-                downFunc(currentNode);
-            } else if (currentNode.action == "left") {
-                leftFunc(currentNode);
-            } else if (currentNode.action == "right") {
-                rightFunc(currentNode);
-            } else if (currentNode.action == "carry") {
-                carryFunc(currentNode);
-            } else if (currentNode.action == "drop") {
-                dropFunc(currentNode);
-            } else if (currentNode.action == "takePill") {
-                takepillFunc(currentNode);
-            } else if (currentNode.action == "kill") {
-                killFunc(currentNode);
-            } else if (currentNode.action == "fly") {
-                flyFunc(currentNode);
-            }
+            } else {
+                if (currentNode.value.neoDmg < 100) {
 
-            for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-                currentNode.value.hostagesDmg[i] += 2;
-                if (currentNode.value.hostagesDmg[i] >= 100) {
-                    currentNode.value.hostagesDmg[i] = 100;
-                    if (currentNode.value.hostagesCarried[i] == false) {
-                        currentNode.value.hostageAgent[i] = true;
+                    for (int i = 0; i < 9; i++) {
+                        matrixValue tempMatrix = new matrixValue(currentNode.value);
+                        MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(tempMatrix, actions[i]);
+                        switch (actions[i]) {
+                        case "up":
+                            if ((boolean) upFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) upFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "down":
+                            if ((boolean) downFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) downFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "left":
+                            if ((boolean) leftFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) leftFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "right":
+                            if ((boolean) rightFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) rightFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "carry":
+                            if ((boolean) carryFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) carryFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "drop":
+                            if ((boolean) dropFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) dropFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "takePill":
+                            if ((boolean) takepillFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) takepillFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "kill":
+                            if ((boolean) killFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) killFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+                        case "fly":
+                            if ((boolean) flyFunc(temp).a) {
+                                temp = (MyTreeNode<matrixValue>) flyFunc(temp).b;
+                                currentNode.addChild(temp);
+                                queue.add(temp);
+                            }
+                            break;
+
+                        default:
+                            break;
+                        }
+
                     }
                 }
+            }
 
-            }
-            for (MyTreeNode<matrixValue> myTreeNode : queue) {
-                System.out.println(myTreeNode.action);
-            }
-        } while (hostages != 0);
-        while (currentNode != null) {
+            // System.out.println(currentNode.value.currentHostages);
+
+            // for (MyTreeNode<matrixValue> myTreeNode : queue) {
+            // System.out.println(myTreeNode.action);
+            // }
+            // System.out.println(currentNode.value.currentHostages);
+            // for (MyTreeNode<matrixValue> myTreeNode : currentNode.getChildren()) {
+            // System.out.println(myTreeNode.action);
+
+            // }
+        } while (currentNode.value.currentHostages != 0);
+        System.out.println(currentNode.value.currentHostages);
+        while (currentNode.action != "root") {
             System.out.println(currentNode.action);
             currentNode = currentNode.getParent();
         }
@@ -477,8 +639,8 @@ public class App {
         queue.add(tree);
         switch (strategy) {
         case "BFS":
-        bfs(queue);
-        break;
+            bfs(queue);
+            break;
 
         }
 
@@ -487,7 +649,9 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         // for (int i = 0; i < 10; i++) {
-        String grid = genGrid();
+        // String grid = genGrid();
+        String grid = "5,5;2;0,4;1,4;0,1,1,1,2,1,3,1,3,3,3,4;1,0,2,4;0,3,4,3,4,3,0,3;0,0,30,3,0,80,4,4,80";
+
         solve(grid, "BFS", false);
 
         // }
