@@ -19,6 +19,7 @@ public class matrixValue {
     public int currentHostages;
     public boolean[] hostagesCarried;
     public boolean[] hostageAgent;
+    public boolean[] hostageAgentKilled;
     public boolean[] agentDead;
     public int neoDmg;
 
@@ -56,6 +57,7 @@ public class matrixValue {
         hostagesDmg = new int[hostages.length];
         hostagesCarried = new boolean[hostages.length];
         hostageAgent = new boolean[hostages.length];
+        hostageAgentKilled=new boolean[hostages.length];
 
         for (int i = 0; i < hostages.length; i += 3) {
             hostagesX[i] = Integer.parseInt(hostages[i]);
@@ -63,7 +65,7 @@ public class matrixValue {
             hostagesDmg[i] = Integer.parseInt(hostages[i + 2]);
             hostagesCarried[i] = false;
             hostageAgent[i] = false;
-
+            hostageAgentKilled[i]=false;
         }
         currentHostages = hostages.length;
         this.neoDmg = neoDmg;
@@ -90,6 +92,7 @@ public class matrixValue {
         hostagesDmg = x.hostagesDmg;
         hostagesCarried = x.hostagesCarried;
         hostageAgent = x.hostageAgent;
+        hostageAgentKilled = x.hostageAgentKilled;
         currentHostages = x.currentHostages;
         neoDmg = x.neoDmg;
         carryCount = x.carryCount;
