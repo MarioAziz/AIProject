@@ -16,8 +16,10 @@ public class matrixValue {
     public int[] hostagesX;
     public int[] hostagesY;
     public int[] hostagesDmg;
+    public int currentHostages;
     public boolean[] hostagesCarried;
     public boolean[] hostageAgent;
+    public boolean[] hostageAgentKilled;
     public boolean[] agentDead;
     public int neoDmg;
 
@@ -55,6 +57,7 @@ public class matrixValue {
         hostagesDmg = new int[hostages.length];
         hostagesCarried = new boolean[hostages.length];
         hostageAgent = new boolean[hostages.length];
+        hostageAgentKilled=new boolean[hostages.length];
 
         for (int i = 0; i < hostages.length; i += 3) {
             hostagesX[i] = Integer.parseInt(hostages[i]);
@@ -62,10 +65,37 @@ public class matrixValue {
             hostagesDmg[i] = Integer.parseInt(hostages[i + 2]);
             hostagesCarried[i] = false;
             hostageAgent[i] = false;
-
+            hostageAgentKilled[i]=false;
         }
+        currentHostages = hostages.length;
         this.neoDmg = neoDmg;
         carryCount = 0;
+    }
+
+    public matrixValue(matrixValue x) {
+        this.gridSizeX = x.gridSizeX;
+        this.gridSizeY = x.gridSizeY;
+        this.cap = x.cap;
+        this.neoPositionX = x.neoPositionX;
+        this.neoPositionY = x.neoPositionY;
+        this.telephoneX = x.telephoneX;
+        this.telephoneY = x.telephoneY;
+        agentsX = x.agentsX;
+        agentsY = x.agentsY;
+        agentDead = x.agentDead;
+        pillsX = x.pillsX;
+        pillsY = x.pillsY;
+        padsX = x.padsX;
+        padsY = x.padsY;
+        hostagesX = x.hostagesX;
+        hostagesY = x.hostagesY;
+        hostagesDmg = x.hostagesDmg;
+        hostagesCarried = x.hostagesCarried;
+        hostageAgent = x.hostageAgent;
+        hostageAgentKilled = x.hostageAgentKilled;
+        currentHostages = x.currentHostages;
+        neoDmg = x.neoDmg;
+        carryCount = x.carryCount;
     }
 
 }
