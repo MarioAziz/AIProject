@@ -39,11 +39,21 @@ public class MyTreeNode<T>{
         this.value = value;
     }
 
-    private void setParent(MyTreeNode<T> parent) {
+    public void setParent(MyTreeNode<T> parent) {
         this.parent = parent;
     }
 
     public MyTreeNode<T> getParent() {
         return parent;
+    }
+    public int getLevel(MyTreeNode<T> parent){
+        int lvl=0;
+
+        while(parent.getParent()!=null){
+            parent=parent.getParent();
+            lvl++;
+        }
+        return lvl;
+
     }
 }
