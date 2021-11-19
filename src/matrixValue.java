@@ -1,4 +1,6 @@
-public class matrixValue {
+import java.util.Arrays;
+
+public class matrixValue implements Cloneable {
     public int gridSizeX;
     public int gridSizeY;
     public int cap;
@@ -47,7 +49,7 @@ public class matrixValue {
         for (int i = 0; i < pillsX.length; i++) {
             pillsX[i] = Integer.parseInt(pills[i * 2]);
             pillsY[i] = Integer.parseInt(pills[i * 2 + 1]);
-            pillTaken[i]=false;
+            pillTaken[i] = false;
         }
         padsX = new int[pads.length / 2];
         padsY = new int[pads.length / 2];
@@ -63,9 +65,9 @@ public class matrixValue {
         hostageAgentKilled = new boolean[hostages.length / 3];
 
         for (int i = 0; i < hostagesX.length; i++) {
-            hostagesX[i] = Integer.parseInt(hostages[i*3]);
-            hostagesY[i] = Integer.parseInt(hostages[i*3 + 1]);
-            hostagesDmg[i] = Integer.parseInt(hostages[i*3 + 2]);
+            hostagesX[i] = Integer.parseInt(hostages[i * 3]);
+            hostagesY[i] = Integer.parseInt(hostages[i * 3 + 1]);
+            hostagesDmg[i] = Integer.parseInt(hostages[i * 3 + 2]);
             hostagesCarried[i] = false;
             hostageAgent[i] = false;
             hostageAgentKilled[i] = false;
@@ -88,7 +90,7 @@ public class matrixValue {
         agentDead = x.agentDead;
         pillsX = x.pillsX;
         pillsY = x.pillsY;
-        pillTaken=x.pillTaken;
+        pillTaken = x.pillTaken;
         padsX = x.padsX;
         padsY = x.padsY;
         hostagesX = x.hostagesX;
@@ -100,6 +102,16 @@ public class matrixValue {
         currentHostages = x.currentHostages;
         neoDmg = x.neoDmg;
         carryCount = x.carryCount;
+    }
+    public matrixValue clone(){
+        return new matrixValue(this);
+
+    }
+    public String hashValue() {
+        
+        return ""+carryCount + neoPositionX + neoPositionY + telephoneX + telephoneY + Arrays.toString(agentsX) +  Arrays.toString(agentsY) + Arrays.toString(pillsX)+ Arrays.toString(pillsY)
+                +  Arrays.toString(pillTaken) + Arrays.toString(padsX) +  Arrays.toString(padsY) + Arrays.toString(hostagesX) + Arrays.toString(hostagesY) +  Arrays.toString(hostagesDmg)+ currentHostages + Arrays.toString(hostagesCarried)
+                + Arrays.toString(hostageAgent) +Arrays.toString(hostageAgentKilled) +Arrays.toString(agentDead) + neoDmg;
     }
 
 }

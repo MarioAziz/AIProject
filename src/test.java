@@ -1,4 +1,3 @@
-import jdk.jfr.internal.tool.Main;
 
 public class test {
 public static void main(String[] args) {

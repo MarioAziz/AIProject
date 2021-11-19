@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class App {
-    public static String[] actions = { "up", "down", "left", "right", "carry", "drop", "takePill", "kill", "fly" };
+    public static String[] actions = { "carry", "drop", "takePill", "kill", "fly", "up", "down", "left", "right" };
     public static Queue<MyTreeNode<matrixValue>> queue;
 
     public static String genGrid() {
@@ -547,9 +547,12 @@ public class App {
         }
         boolean action = false;
         for (int i = 0; i < currentNode.value.padsX.length; i += 2) {
+
             if (currentNode.value.neoPositionX == currentNode.value.padsX[i]
                     && currentNode.value.neoPositionY == currentNode.value.padsY[i] && !action) {
-                if (currentNode.getParent() != null && currentNode.getParent().action != "fly") {
+
+                if ((currentNode.getParent() != null && currentNode.getParent().action != "fly")
+                        || currentNode.getParent() == null) {
                     currentNode.value.neoPositionX = currentNode.value.padsX[i + 1];
                     currentNode.value.neoPositionY = currentNode.value.padsY[i + 1];
                     action = true;
@@ -567,92 +570,104 @@ public class App {
     public static void bfs(Queue<MyTreeNode<matrixValue>> queue) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         int counter = 0;
-        MyTreeNode<matrixValue> currentNode=queue.peek();
+        HashSet<String> hash = new HashSet<>();
+        MyTreeNode<matrixValue> currentNode = queue.peek();
+        hash.add(currentNode.value.hashValue());
         do {
             // for (int v = 0; v < 50; v++) {
-                
-            
-
             currentNode = (MyTreeNode<matrixValue>) queue.remove();
             if (currentNode.value.neoDmg < 100) {
 
                 for (int i = 0; i < 9; i++) {
-                    matrixValue tempMatrix = new matrixValue(currentNode.value);
-                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(tempMatrix, actions[i]);
-                    temp.setParent(currentNode);
+                    matrixValue tempMatrix = currentNode.value.clone();
+                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(new matrixValue( tempMatrix), actions[i]);
+                    // temp.setParent(currentNode);
                     switch (temp.action) {
                         case "up":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair = upFunc(temp);
-                            if (outPair.a) {
+                            if (outPair.a && !hash.contains(outPair.b.value.hashValue())) {
+                                hash.add(outPair.b.value.hashValue());
                                 currentNode.addChild(outPair.b);
                                 queue.add(outPair.b);
                             }
                             break;
                         case "down":
-                            outPair = downFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair2 = downFunc(temp);
+                            if (outPair2.a && !hash.contains(outPair2.b.value.hashValue())) {
+                                hash.add(outPair2.b.value.hashValue());
+                                currentNode.addChild(outPair2.b);
+                                queue.add(outPair2.b);
                             }
                             break;
                         case "left":
-                            outPair = leftFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair3 = leftFunc(temp);
+                            if (outPair3.a && !hash.contains(outPair3.b.value.hashValue())) {
+                                hash.add(outPair3.b.value.hashValue());
+                                currentNode.addChild(outPair3.b);
+                                queue.add(outPair3.b);
                             }
                             break;
                         case "right":
-                            outPair = rightFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair4 = rightFunc(temp);
+                            if (outPair4.a && !hash.contains(outPair4.b.value.hashValue())) {
+                                hash.add(outPair4.b.value.hashValue());
+                                currentNode.addChild(outPair4.b);
+                                queue.add(outPair4.b);
                             }
                             break;
                         case "carry":
-                            outPair = carryFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                        Pair<Boolean, MyTreeNode<matrixValue>> outPair5 = carryFunc(temp);
+                            if (outPair5.a && !hash.contains(outPair5.b.value.hashValue())) {
+                                hash.add(outPair5.b.value.hashValue());
+                                currentNode.addChild(outPair5.b);
+                                queue.add(outPair5.b);
                             }
                             break;
                         case "drop":
-                            outPair = dropFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                        Pair<Boolean, MyTreeNode<matrixValue>> outPair6 = dropFunc(temp);
+                            if (outPair6.a && !hash.contains(outPair6.b.value.hashValue())) {
+                                hash.add(outPair6.b.value.hashValue());
+                                currentNode.addChild(outPair6.b);
+                                queue.add(outPair6.b);
 
                             }
                             break;
                         case "takePill":
-                            outPair = takepillFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                        Pair<Boolean, MyTreeNode<matrixValue>> outPair7 = takepillFunc(temp);
+                            if (outPair7.a && !hash.contains(outPair7.b.value.hashValue())) {
+                                hash.add(outPair7.b.value.hashValue());
+                                currentNode.addChild(outPair7.b);
+                                queue.add(outPair7.b);
 
                             }
                             break;
                         case "kill":
-                            outPair = killFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                        Pair<Boolean, MyTreeNode<matrixValue>> outPair8 = killFunc(temp);
+                            if (outPair8.a && !hash.contains(outPair8.b.value.hashValue())) {
+                                hash.add(outPair8.b.value.hashValue());
+                                currentNode.addChild(outPair8.b);
+                                queue.add(outPair8.b);
                             }
                             break;
                         case "fly":
-                            outPair = flyFunc(temp);
-                            if (outPair.a) {
-                                currentNode.addChild(outPair.b);
-                                queue.add(outPair.b);
+                        Pair<Boolean, MyTreeNode<matrixValue>> outPair9= flyFunc(temp);
+                            if (outPair9.a && !hash.contains(outPair9.b.value.hashValue())) {
+                                hash.add(outPair9.b.value.hashValue());
+                                currentNode.addChild(outPair9.b);
+                                queue.add(outPair9.b);
                             }
                             break;
 
                         default:
                             break;
                     }
+                    
+                   System.out.print(Arrays.toString(temp.value.hostagesDmg));
 
                 }
-                // System.out.println(currentNode.getLevel(currentNode)+","+"root= " + currentNode.action + "," + currentNode.value.currentHostages);
+                System.out.println("");
+                // System.out.println(currentNode.getLevel(currentNode)+","+"root= " +
+                // currentNode.action + "," + currentNode.value.currentHostages);
 
             }
 
@@ -664,8 +679,8 @@ public class App {
             // TimeUnit.SECONDS.sleep(2);
             // System.out.println(counter);
             // counter++;
-        } while (currentNode.value.currentHostages > 0);
-            // }
+        } while (currentNode.value.currentHostages != 0);
+        // }
         while (currentNode.action != "root") {
             System.out.println(currentNode.value.currentHostages);
             System.out.println(currentNode.action);
@@ -687,8 +702,11 @@ public class App {
         matrixValue root = new matrixValue(gridSize, cap, neoPosition, telephone, agents, pills, pads, hostages,
                 neoDmg);
         MyTreeNode<matrixValue> tree = new MyTreeNode<matrixValue>(root, "root");
+        // System.out.println(root.hashValue());
         queue = new ArrayDeque<>();
         queue.add(tree);
+        // solvetest(tree);
+
         switch (strategy) {
             case "BFS":
                 bfs(queue);
@@ -699,11 +717,53 @@ public class App {
         return "";
     }
 
+    public static void solvetest(MyTreeNode<matrixValue> tree) {
+        System.out.println(tree.value.currentHostages);
+        MyTreeNode<matrixValue> down = downFunc(tree).b;
+        System.out.println(tree.value.neoPositionX + " , " + tree.value.neoPositionY);
+        MyTreeNode<matrixValue> fly = flyFunc(tree).b;
+        System.out.println(tree.value.neoPositionX + " , " + tree.value.neoPositionY);
+        MyTreeNode<matrixValue> up = upFunc(tree).b;
+        System.out.println(tree.value.neoPositionX + " , " + tree.value.neoPositionY);
+        MyTreeNode<matrixValue> carry = carryFunc(tree).b;
+        for (Boolean x : tree.value.hostagesCarried) {
+            System.out.println(x);
+        }
+
+        down = downFunc(tree).b;
+        fly = flyFunc(tree).b;
+        MyTreeNode<matrixValue> right = rightFunc(tree).b;
+        up = upFunc(tree).b;
+        MyTreeNode<matrixValue> drop = dropFunc(tree).b;
+        System.out.println(drop.value.currentHostages);
+        down = downFunc(tree).b;
+        down = downFunc(tree).b;
+        MyTreeNode<matrixValue> kill = killFunc(tree).b;
+        down = downFunc(tree).b;
+        down = downFunc(tree).b;
+        MyTreeNode<matrixValue> left = leftFunc(tree).b;
+        carry = carryFunc(tree).b;
+        right = rightFunc(tree).b;
+        right = rightFunc(tree).b;
+        kill = killFunc(tree).b;
+        System.out.println(tree.value.currentHostages);
+
+        left = leftFunc(tree).b;
+        up = upFunc(tree).b;
+        up = upFunc(tree).b;
+        up = upFunc(tree).b;
+        up = upFunc(tree).b;
+        drop = dropFunc(tree).b;
+        System.out.println(tree.value.currentHostages);
+
+        System.out.println(drop.value.neoPositionX + " , " + drop.value.neoPositionY);
+
+    }
+
     public static void main(String[] args) throws Exception {
         // for (int i = 0; i < 10; i++) {
         // String grid = genGrid();
         String grid = "5,5;2;0,4;1,4;0,1,1,1,2,1,3,1,3,3,3,4;1,0,2,4;0,3,4,3,4,3,0,3;0,0,30,3,0,80,4,4,80";
-
         solve(grid, "BFS", false);
 
         // }
