@@ -128,19 +128,7 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> upFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
 
-        }
         boolean up = false;
         if ((currentNode.getParent() != null && currentNode.getParent().action != "down")
                 || currentNode.getParent() == null) {
@@ -180,19 +168,7 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> downFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
 
-        }
         boolean down = false;
         if ((currentNode.getParent() != null && currentNode.getParent().action != "up")
                 || currentNode.getParent() == null) {
@@ -239,19 +215,7 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> leftFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
 
-        }
         boolean left = false;
         if ((currentNode.getParent() != null && currentNode.getParent().action != "right")
                 || currentNode.getParent() == null) {
@@ -291,19 +255,7 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> rightFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
 
-        }
         boolean right = false;
         if ((currentNode.getParent() != null && currentNode.getParent().action != "left")
                 || currentNode.getParent() == null) {
@@ -352,19 +304,7 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> dropFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
 
-        }
         boolean action = false;
         // If the hostage returned to the telehpone booth
         for (int i = 0; i < currentNode.value.hostagesX.length; i++) {
@@ -386,19 +326,7 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> carryFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
 
-        }
         boolean action = false;
         for (int i = 0; i < currentNode.value.hostagesX.length; i++) {
             if (currentNode.value.neoPositionX == currentNode.value.hostagesX[i]
@@ -428,25 +356,24 @@ public class App {
                 currentNode.value.pillTaken[i] = true;
                 for (int j = 0; j < currentNode.value.hostagesX.length; j++) {
                     if (!currentNode.value.hostageAgent[j] && !currentNode.value.hostageAgentKilled[j]) {
-                        currentNode.value.hostagesDmg[j] -= 20;
-                        if (currentNode.value.hostagesDmg[j] < 0) {
-                            currentNode.value.hostagesDmg[j] = 0;
+                        if (currentNode.value.hostagesDmg[j] != 100) {
+                            currentNode.value.hostagesDmg[j] -= 20;
+                            if (currentNode.value.hostagesDmg[j] < 0) {
+                                currentNode.value.hostagesDmg[j] = 0;
+                            }
                         }
                     }
                 }
             }
         }
-        if (!action) {
+        if (action) {
             for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-                currentNode.value.hostagesDmg[i] += 2;
-                if (currentNode.value.hostagesDmg[i] >= 100) {
-                    currentNode.value.hostagesDmg[i] = 100;
-                    if (currentNode.value.hostagesCarried[i] == false
-                            && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                            && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                            && !currentNode.value.hostageAgentKilled[i]) {
-                        currentNode.value.hostageAgent[i] = true;
+                if (currentNode.value.hostagesDmg[i] < 100) {
+                    currentNode.value.hostagesDmg[i] -= 2;
+                    if (currentNode.value.hostagesDmg[i] < 0) {
+                        currentNode.value.hostagesDmg[i] = 0;
                     }
+
                 }
 
             }
@@ -458,19 +385,6 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> killFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
-
-        }
         int x = currentNode.value.neoPositionX;
         int y = currentNode.value.neoPositionY;
         boolean action = false;
@@ -532,19 +446,7 @@ public class App {
     }
 
     public static Pair<Boolean, MyTreeNode<matrixValue>> flyFunc(MyTreeNode<matrixValue> currentNode) {
-        for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-            currentNode.value.hostagesDmg[i] += 2;
-            if (currentNode.value.hostagesDmg[i] >= 100) {
-                currentNode.value.hostagesDmg[i] = 100;
-                if (currentNode.value.hostagesCarried[i] == false
-                        && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
-                        && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
-                        && !currentNode.value.hostageAgentKilled[i]) {
-                    currentNode.value.hostageAgent[i] = true;
-                }
-            }
 
-        }
         boolean action = false;
         for (int i = 0; i < currentNode.value.padsX.length; i += 2) {
 
@@ -575,12 +477,30 @@ public class App {
         hash.add(currentNode.value.hashValue());
         do {
             // for (int v = 0; v < 50; v++) {
-            currentNode = (MyTreeNode<matrixValue>) queue.remove();
-            if (currentNode.value.neoDmg < 100) {
+            MyTreeNode<matrixValue> tempNode = queue.remove();
 
+            currentNode = new MyTreeNode(tempNode.value, tempNode.action);
+            if (currentNode.value.neoDmg < 100) {
+                for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
+                    if (currentNode.getParent() == null) {
+                        currentNode.value.hostagesDmg[i] += 2;
+                    } else {
+                        currentNode.value.hostagesDmg[i] = currentNode.getParent().value.hostagesDmg[i] + 2;
+                    }
+                    if (currentNode.value.hostagesDmg[i] >= 100) {
+                        currentNode.value.hostagesDmg[i] = 100;
+                        if (currentNode.value.hostagesCarried[i] == false
+                                && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
+                                && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
+                                && !currentNode.value.hostageAgentKilled[i]) {
+                            currentNode.value.hostageAgent[i] = true;
+                        }
+                    }
+
+                }
                 for (int i = 0; i < 9; i++) {
                     matrixValue tempMatrix = currentNode.value.clone();
-                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(new matrixValue( tempMatrix), actions[i]);
+                    MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(new matrixValue(tempMatrix), actions[i]);
                     // temp.setParent(currentNode);
                     switch (temp.action) {
                         case "up":
@@ -616,7 +536,7 @@ public class App {
                             }
                             break;
                         case "carry":
-                        Pair<Boolean, MyTreeNode<matrixValue>> outPair5 = carryFunc(temp);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair5 = carryFunc(temp);
                             if (outPair5.a && !hash.contains(outPair5.b.value.hashValue())) {
                                 hash.add(outPair5.b.value.hashValue());
                                 currentNode.addChild(outPair5.b);
@@ -624,7 +544,7 @@ public class App {
                             }
                             break;
                         case "drop":
-                        Pair<Boolean, MyTreeNode<matrixValue>> outPair6 = dropFunc(temp);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair6 = dropFunc(temp);
                             if (outPair6.a && !hash.contains(outPair6.b.value.hashValue())) {
                                 hash.add(outPair6.b.value.hashValue());
                                 currentNode.addChild(outPair6.b);
@@ -633,7 +553,7 @@ public class App {
                             }
                             break;
                         case "takePill":
-                        Pair<Boolean, MyTreeNode<matrixValue>> outPair7 = takepillFunc(temp);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair7 = takepillFunc(temp);
                             if (outPair7.a && !hash.contains(outPair7.b.value.hashValue())) {
                                 hash.add(outPair7.b.value.hashValue());
                                 currentNode.addChild(outPair7.b);
@@ -642,7 +562,7 @@ public class App {
                             }
                             break;
                         case "kill":
-                        Pair<Boolean, MyTreeNode<matrixValue>> outPair8 = killFunc(temp);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair8 = killFunc(temp);
                             if (outPair8.a && !hash.contains(outPair8.b.value.hashValue())) {
                                 hash.add(outPair8.b.value.hashValue());
                                 currentNode.addChild(outPair8.b);
@@ -650,7 +570,7 @@ public class App {
                             }
                             break;
                         case "fly":
-                        Pair<Boolean, MyTreeNode<matrixValue>> outPair9= flyFunc(temp);
+                            Pair<Boolean, MyTreeNode<matrixValue>> outPair9 = flyFunc(temp);
                             if (outPair9.a && !hash.contains(outPair9.b.value.hashValue())) {
                                 hash.add(outPair9.b.value.hashValue());
                                 currentNode.addChild(outPair9.b);
@@ -661,11 +581,16 @@ public class App {
                         default:
                             break;
                     }
-                    
-                   System.out.print(Arrays.toString(temp.value.hostagesDmg));
+
+                    System.out
+                            .print(currentNode.getLevel(currentNode) + Arrays.toString(currentNode.value.hostagesDmg));
 
                 }
                 System.out.println("");
+                if (currentNode.getParent() != null)
+                    System.out.print("Parent=" + currentNode.getParent().getLevel(currentNode)
+                            + Arrays.toString(currentNode.getParent().value.hostagesDmg));
+                // System.out.println("");
                 // System.out.println(currentNode.getLevel(currentNode)+","+"root= " +
                 // currentNode.action + "," + currentNode.value.currentHostages);
 
