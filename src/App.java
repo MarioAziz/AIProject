@@ -474,18 +474,20 @@ public class App {
         int counter = 0;
         HashSet<String> hash = new HashSet<>();
         MyTreeNode<matrixValue> currentNode = queue.peek();
-        hash.add(currentNode.value.hashValue());
+        hash.add(currentNode.value.hashValue()+currentNode.getLevel(currentNode));
         do {
             // for (int v = 0; v < 50; v++) {
-            MyTreeNode<matrixValue> tempNode = queue.remove();
+            // MyTreeNode<matrixValue> tempNode = queue.remove();
 
-            currentNode = new MyTreeNode(tempNode.value, tempNode.action);
+            // currentNode = new MyTreeNode(tempNode.value, tempNode.action);
+            currentNode = queue.remove();
+
             if (currentNode.value.neoDmg < 100) {
                 for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
                     if (currentNode.getParent() == null) {
                         currentNode.value.hostagesDmg[i] += 2;
                     } else {
-                        currentNode.value.hostagesDmg[i] = currentNode.getParent().value.hostagesDmg[i] + 2;
+                        currentNode.value.hostagesDmg[i] = currentNode.value.hostagesDmg[i] + 2;
                     }
                     if (currentNode.value.hostagesDmg[i] >= 100) {
                         currentNode.value.hostagesDmg[i] = 100;
@@ -505,48 +507,48 @@ public class App {
                     switch (temp.action) {
                         case "up":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair = upFunc(temp);
-                            if (outPair.a && !hash.contains(outPair.b.value.hashValue())) {
-                                hash.add(outPair.b.value.hashValue());
+                            if (outPair.a && !hash.contains(outPair.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair.b);
                                 queue.add(outPair.b);
                             }
                             break;
                         case "down":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair2 = downFunc(temp);
-                            if (outPair2.a && !hash.contains(outPair2.b.value.hashValue())) {
-                                hash.add(outPair2.b.value.hashValue());
+                            if (outPair2.a && !hash.contains(outPair2.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair2.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair2.b);
                                 queue.add(outPair2.b);
                             }
                             break;
                         case "left":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair3 = leftFunc(temp);
-                            if (outPair3.a && !hash.contains(outPair3.b.value.hashValue())) {
-                                hash.add(outPair3.b.value.hashValue());
+                            if (outPair3.a && !hash.contains(outPair3.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair3.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair3.b);
                                 queue.add(outPair3.b);
                             }
                             break;
                         case "right":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair4 = rightFunc(temp);
-                            if (outPair4.a && !hash.contains(outPair4.b.value.hashValue())) {
-                                hash.add(outPair4.b.value.hashValue());
+                            if (outPair4.a && !hash.contains(outPair4.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair4.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair4.b);
                                 queue.add(outPair4.b);
                             }
                             break;
                         case "carry":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair5 = carryFunc(temp);
-                            if (outPair5.a && !hash.contains(outPair5.b.value.hashValue())) {
-                                hash.add(outPair5.b.value.hashValue());
+                            if (outPair5.a && !hash.contains(outPair5.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair5.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair5.b);
                                 queue.add(outPair5.b);
                             }
                             break;
                         case "drop":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair6 = dropFunc(temp);
-                            if (outPair6.a && !hash.contains(outPair6.b.value.hashValue())) {
-                                hash.add(outPair6.b.value.hashValue());
+                            if (outPair6.a && !hash.contains(outPair6.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair6.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair6.b);
                                 queue.add(outPair6.b);
 
@@ -554,8 +556,8 @@ public class App {
                             break;
                         case "takePill":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair7 = takepillFunc(temp);
-                            if (outPair7.a && !hash.contains(outPair7.b.value.hashValue())) {
-                                hash.add(outPair7.b.value.hashValue());
+                            if (outPair7.a && !hash.contains(outPair7.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair7.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair7.b);
                                 queue.add(outPair7.b);
 
@@ -563,16 +565,16 @@ public class App {
                             break;
                         case "kill":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair8 = killFunc(temp);
-                            if (outPair8.a && !hash.contains(outPair8.b.value.hashValue())) {
-                                hash.add(outPair8.b.value.hashValue());
+                            if (outPair8.a && !hash.contains(outPair8.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair8.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair8.b);
                                 queue.add(outPair8.b);
                             }
                             break;
                         case "fly":
                             Pair<Boolean, MyTreeNode<matrixValue>> outPair9 = flyFunc(temp);
-                            if (outPair9.a && !hash.contains(outPair9.b.value.hashValue())) {
-                                hash.add(outPair9.b.value.hashValue());
+                            if (outPair9.a && !hash.contains(outPair9.b.value.hashValue()+currentNode.getLevel(currentNode))) {
+                                hash.add(outPair9.b.value.hashValue()+currentNode.getLevel(currentNode));
                                 currentNode.addChild(outPair9.b);
                                 queue.add(outPair9.b);
                             }
