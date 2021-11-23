@@ -350,7 +350,7 @@ public class App {
         for (int i = 0; i < currentNode.value.pillsX.length; i++) {
             if (currentNode.value.neoPositionX == currentNode.value.pillsX[i]
                     && currentNode.value.neoPositionY == currentNode.value.pillsY[i]
-                    && !currentNode.value.pillTaken[i]) {
+                    && !currentNode.value.pillTaken[i] && currentNode.value.hostagesDmg[i]!=100) {
                 currentNode.value.neoDmg -= 20;
                 action = true;
                 currentNode.value.pillTaken[i] = true;
@@ -477,18 +477,20 @@ public class App {
         hash.add(currentNode.value.hashValue());
         do {
             // for (int v = 0; v < 50; v++) {
-            MyTreeNode<matrixValue> tempNode = queue.remove();
+            // MyTreeNode<matrixValue> tempNode = queue.remove();
 
-            currentNode = new MyTreeNode(tempNode.value, tempNode.action);
+            // currentNode = new MyTreeNode(tempNode.value, tempNode.action);
+            currentNode = queue.remove();
+
             if (currentNode.value.neoDmg < 100) {
+                int[] tempDmg = new int[currentNode.value.hostagesDmg.length];
+                for (int i = 0; i < tempDmg.length; i++) {
+                    tempDmg[i] = currentNode.value.hostagesDmg[i];
+                }
                 for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
-                    if (currentNode.getParent() == null) {
-                        currentNode.value.hostagesDmg[i] += 2;
-                    } else {
-                        currentNode.value.hostagesDmg[i] = currentNode.getParent().value.hostagesDmg[i] + 2;
-                    }
-                    if (currentNode.value.hostagesDmg[i] >= 100) {
-                        currentNode.value.hostagesDmg[i] = 100;
+                    tempDmg[i] += 2;
+                    if (tempDmg[i] >= 100) {
+                        tempDmg[i] = 100;
                         if (currentNode.value.hostagesCarried[i] == false
                                 && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
                                 && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
@@ -498,6 +500,11 @@ public class App {
                     }
 
                 }
+                currentNode.value.hostagesDmg = new int[tempDmg.length];
+                for (int i = 0; i < tempDmg.length; i++) {
+                    currentNode.value.hostagesDmg[i] = tempDmg[i];
+                }
+
                 for (int i = 0; i < 9; i++) {
                     matrixValue tempMatrix = currentNode.value.clone();
                     MyTreeNode<matrixValue> temp = new MyTreeNode<matrixValue>(new matrixValue(tempMatrix), actions[i]);
