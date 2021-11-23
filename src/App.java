@@ -154,10 +154,19 @@ public class App {
             }
             if (up) {
                 currentNode.value.neoPositionY += 1;
+                int[] hostagesYTemp = new int[currentNode.value.hostagesY.length];
+                for (int i = 0; i < hostagesYTemp.length; i++) {
+                    hostagesYTemp[i] = currentNode.value.hostagesY[i];
+                }
                 for (int i = 0; i < currentNode.value.hostagesCarried.length; i++) {
                     if (currentNode.value.hostagesCarried[i]) {
-                        currentNode.value.hostagesY[i] += 1;
+                        // currentNode.value.hostagesY[i] += 1;
+                        hostagesYTemp[i] += 1;
                     }
+                }
+                currentNode.value.hostagesY = new int[hostagesYTemp.length];
+                for (int i = 0; i < hostagesYTemp.length; i++) {
+                    currentNode.value.hostagesY[i] = hostagesYTemp[i];
                 }
 
             }
@@ -195,10 +204,19 @@ public class App {
                 }
                 if (down) {
                     currentNode.value.neoPositionY -= 1;
+                    int[] hostagesYTemp = new int[currentNode.value.hostagesY.length];
+                    for (int i = 0; i < hostagesYTemp.length; i++) {
+                        hostagesYTemp[i] = currentNode.value.hostagesY[i];
+                    }
                     for (int i = 0; i < currentNode.value.hostagesCarried.length; i++) {
                         if (currentNode.value.hostagesCarried[i]) {
-                            currentNode.value.hostagesY[i] -= 1;
+                            // currentNode.value.hostagesY[i] -= 1;
+                            hostagesYTemp[i] -= 1;
                         }
+                    }
+                    currentNode.value.hostagesY = new int[hostagesYTemp.length];
+                    for (int i = 0; i < hostagesYTemp.length; i++) {
+                        currentNode.value.hostagesY[i] = hostagesYTemp[i];
                     }
 
                     // for (int i = 0; i < 9; i++) {
@@ -242,10 +260,19 @@ public class App {
                 }
                 if (left) {
                     currentNode.value.neoPositionX -= 1;
+                    int[] hostagesXTemp = new int[currentNode.value.hostagesX.length];
+                    for (int i = 0; i < hostagesXTemp.length; i++) {
+                        hostagesXTemp[i] = currentNode.value.hostagesX[i];
+                    }
                     for (int i = 0; i < currentNode.value.hostagesCarried.length; i++) {
                         if (currentNode.value.hostagesCarried[i]) {
-                            currentNode.value.hostagesX[i] -= 1;
+                            // currentNode.value.hostagesX[i] -= 1;
+                            hostagesXTemp[i] -= 1;
                         }
+                    }
+                    currentNode.value.hostagesX = new int[hostagesXTemp.length];
+                    for (int i = 0; i < hostagesXTemp.length; i++) {
+                        currentNode.value.hostagesX[i] = hostagesXTemp[i];
                     }
                 }
             }
@@ -282,10 +309,19 @@ public class App {
                 }
                 if (right) {
                     currentNode.value.neoPositionX += 1;
+                    int[] hostagesXTemp = new int[currentNode.value.hostagesX.length];
+                    for (int i = 0; i < hostagesXTemp.length; i++) {
+                        hostagesXTemp[i] = currentNode.value.hostagesX[i];
+                    }
                     for (int i = 0; i < currentNode.value.hostagesCarried.length; i++) {
                         if (currentNode.value.hostagesCarried[i]) {
-                            currentNode.value.hostagesX[i] += 1;
+                            // currentNode.value.hostagesX[i] += 1;
+                            hostagesXTemp[i] += 1;
                         }
+                    }
+                    currentNode.value.hostagesX = new int[hostagesXTemp.length];
+                    for (int i = 0; i < hostagesXTemp.length; i++) {
+                        currentNode.value.hostagesX[i] = hostagesXTemp[i];
                     }
 
                     // for (int i = 0; i < 9; i++) {
@@ -306,18 +342,28 @@ public class App {
     public static Pair<Boolean, MyTreeNode<matrixValue>> dropFunc(MyTreeNode<matrixValue> currentNode) {
 
         boolean action = false;
+        boolean[] hostagesCarriedTemp = new boolean[currentNode.value.hostagesCarried.length];
+        for (int i = 0; i < hostagesCarriedTemp.length; i++) {
+            hostagesCarriedTemp[i] = currentNode.value.hostagesCarried[i];
+        }
         // If the hostage returned to the telehpone booth
         for (int i = 0; i < currentNode.value.hostagesX.length; i++) {
             if (currentNode.value.hostagesCarried[i]) {
                 if (currentNode.value.neoPositionX == currentNode.value.telephoneX
                         && currentNode.value.neoPositionY == currentNode.value.telephoneY) {
-                    currentNode.value.hostagesCarried[i] = false;
+                    // currentNode.value.hostagesCarried[i] = false;
+                    hostagesCarriedTemp[i] = false;
                     currentNode.value.carryCount--;
                     currentNode.value.currentHostages--;
                     // System.out.println("drop");
                     action = true;
                 }
             }
+
+        }
+        currentNode.value.hostagesCarried = new boolean[hostagesCarriedTemp.length];
+        for (int i = 0; i < hostagesCarriedTemp.length; i++) {
+            currentNode.value.hostagesCarried[i] = hostagesCarriedTemp[i];
         }
 
         Pair<Boolean, MyTreeNode<matrixValue>> balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(action,
@@ -328,15 +374,23 @@ public class App {
     public static Pair<Boolean, MyTreeNode<matrixValue>> carryFunc(MyTreeNode<matrixValue> currentNode) {
 
         boolean action = false;
+        boolean[] hostagesCarriedTemp = new boolean[currentNode.value.hostagesCarried.length];
+        for (int i = 0; i < hostagesCarriedTemp.length; i++) {
+            hostagesCarriedTemp[i] = currentNode.value.hostagesCarried[i];
+        }
         for (int i = 0; i < currentNode.value.hostagesX.length; i++) {
             if (currentNode.value.neoPositionX == currentNode.value.hostagesX[i]
                     && currentNode.value.neoPositionY == currentNode.value.hostagesY[i]
                     && currentNode.value.carryCount < currentNode.value.cap && !currentNode.value.hostagesCarried[i]
-                    && !currentNode.value.hostageAgent[i] && !currentNode.value.hostageAgentKilled[i]) {
-                currentNode.value.hostagesCarried[i] = true;
+                    && !currentNode.value.hostageAgent[i] && !currentNode.value.hostageAgentKilled[i] && currentNode.value.hostagesX[i] != currentNode.value.telephoneX && currentNode.value.hostagesY[i] != currentNode.value.telephoneY ) {
+                hostagesCarriedTemp[i] = true;
                 currentNode.value.carryCount++;
                 action = true;
             }
+        }
+        currentNode.value.hostagesCarried = new boolean[hostagesCarriedTemp.length];
+        for (int i = 0; i < hostagesCarriedTemp.length; i++) {
+            currentNode.value.hostagesCarried[i] = hostagesCarriedTemp[i];
         }
 
         Pair<Boolean, MyTreeNode<matrixValue>> balabezo = new Pair<Boolean, MyTreeNode<matrixValue>>(action,
@@ -347,35 +401,56 @@ public class App {
     public static Pair<Boolean, MyTreeNode<matrixValue>> takepillFunc(MyTreeNode<matrixValue> currentNode) {
 
         boolean action = false;
+        boolean[] pillTakenTemp = new boolean[currentNode.value.pillTaken.length];
+        for (int i = 0; i < pillTakenTemp.length; i++) {
+            pillTakenTemp[i] = currentNode.value.pillTaken[i];
+        }
+        int[] hostageDmgTmp = new int[currentNode.value.hostagesDmg.length];
+        for (int i = 0; i < hostageDmgTmp.length; i++) {
+            hostageDmgTmp[i] = currentNode.value.hostagesDmg[i];
+        }
         for (int i = 0; i < currentNode.value.pillsX.length; i++) {
             if (currentNode.value.neoPositionX == currentNode.value.pillsX[i]
-                    && currentNode.value.neoPositionY == currentNode.value.pillsY[i]
-                    && !currentNode.value.pillTaken[i] && currentNode.value.hostagesDmg[i]!=100) {
+                    && currentNode.value.neoPositionY == currentNode.value.pillsY[i] && !currentNode.value.pillTaken[i]
+                    && currentNode.value.hostagesDmg[i] != 100) {
                 currentNode.value.neoDmg -= 20;
                 action = true;
-                currentNode.value.pillTaken[i] = true;
+                pillTakenTemp[i] = true;
+                // currentNode.value.pillTaken[i] = true;
                 for (int j = 0; j < currentNode.value.hostagesX.length; j++) {
                     if (!currentNode.value.hostageAgent[j] && !currentNode.value.hostageAgentKilled[j]) {
                         if (currentNode.value.hostagesDmg[j] != 100) {
-                            currentNode.value.hostagesDmg[j] -= 20;
+                            // currentNode.value.hostagesDmg[j] -= 20;
+                            hostageDmgTmp[j] -= 20;
                             if (currentNode.value.hostagesDmg[j] < 0) {
-                                currentNode.value.hostagesDmg[j] = 0;
+                                // currentNode.value.hostagesDmg[j] = 0;
+                                hostageDmgTmp[j] = 0;
                             }
                         }
                     }
                 }
             }
         }
+        currentNode.value.pillTaken = new boolean[pillTakenTemp.length];
+        for (int i = 0; i < pillTakenTemp.length; i++) {
+            currentNode.value.pillTaken[i] = pillTakenTemp[i];
+        }
         if (action) {
             for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
                 if (currentNode.value.hostagesDmg[i] < 100) {
-                    currentNode.value.hostagesDmg[i] -= 2;
+                    // currentNode.value.hostagesDmg[i] -= 2;
+                    hostageDmgTmp[i] -= 2;
                     if (currentNode.value.hostagesDmg[i] < 0) {
-                        currentNode.value.hostagesDmg[i] = 0;
+                        // currentNode.value.hostagesDmg[i] = 0;
+                        hostageDmgTmp[i] = 0;
                     }
 
                 }
 
+            }
+            currentNode.value.hostagesDmg = new int[hostageDmgTmp.length];
+            for (int i = 0; i < hostageDmgTmp.length; i++) {
+                currentNode.value.hostagesDmg[i] = hostageDmgTmp[i];
             }
         }
 
@@ -388,53 +463,93 @@ public class App {
         int x = currentNode.value.neoPositionX;
         int y = currentNode.value.neoPositionY;
         boolean action = false;
+        // Agent dead temp, so as not to reference an array
+        boolean[] agentDeadTemp = new boolean[currentNode.value.agentDead.length];
+        for (int i = 0; i < agentDeadTemp.length; i++) {
+            agentDeadTemp[i] = currentNode.value.agentDead[i];
+        }
+        ///////
+        boolean[] hostageAgentTemp = new boolean[currentNode.value.hostageAgent.length];
+        for (int i = 0; i < hostageAgentTemp.length; i++) {
+            hostageAgentTemp[i] = currentNode.value.hostageAgent[i];
+        }
+        //////
+        boolean[] hostageAgentKilledTemp = new boolean[currentNode.value.hostageAgentKilled.length];
+        for (int i = 0; i < hostageAgentKilledTemp.length; i++) {
+            hostageAgentKilledTemp[i] = currentNode.value.hostageAgentKilled[i];
+        }
+        /////
         for (int i = 0; i < currentNode.value.agentsX.length; i++) {
             if (x == currentNode.value.agentsX[i] - 1 && y == currentNode.value.agentsY[i]
                     && !currentNode.value.agentDead[i]) {
-                currentNode.value.agentDead[i] = true;
+                // currentNode.value.agentDead[i] = true;
+                agentDeadTemp[i] = true;
                 action = true;
             }
             if (x == currentNode.value.agentsX[i] + 1 && y == currentNode.value.agentsY[i]
                     && !currentNode.value.agentDead[i]) {
-                currentNode.value.agentDead[i] = true;
+                // currentNode.value.agentDead[i] = true;
+                agentDeadTemp[i] = true;
                 action = true;
             }
             if (x == currentNode.value.agentsX[i] && y == currentNode.value.agentsY[i] - 1
                     && !currentNode.value.agentDead[i]) {
-                currentNode.value.agentDead[i] = true;
+                // currentNode.value.agentDead[i] = true;
+                agentDeadTemp[i] = true;
                 action = true;
             }
             if (x == currentNode.value.agentsX[i] && y == currentNode.value.agentsY[i] + 1
                     && !currentNode.value.agentDead[i]) {
-                currentNode.value.agentDead[i] = true;
+                // currentNode.value.agentDead[i] = true;
+                agentDeadTemp[i] = true;
                 action = true;
             }
         }
         for (int i = 0; i < currentNode.value.hostageAgent.length; i++) {
             if (currentNode.value.hostageAgent[i] == true && !currentNode.value.hostageAgentKilled[i]) {
                 if (x == currentNode.value.hostagesX[i] - 1 && y == currentNode.value.hostagesY[i]) {
-                    currentNode.value.hostageAgent[i] = false;
-                    currentNode.value.hostageAgentKilled[i] = true;
+                    // currentNode.value.hostageAgent[i] = false;
+                    // currentNode.value.hostageAgentKilled[i] = true;
+                    hostageAgentTemp[i] = false;
+                    hostageAgentKilledTemp[i] = true;
                     currentNode.value.currentHostages--;
                     action = true;
                 } else if (x == currentNode.value.hostagesX[i] + 1 && y == currentNode.value.hostagesY[i]) {
-                    currentNode.value.hostageAgent[i] = false;
+                    // currentNode.value.hostageAgent[i] = false;
                     currentNode.value.currentHostages--;
-                    currentNode.value.hostageAgentKilled[i] = true;
+                    // currentNode.value.hostageAgentKilled[i] = true;
+                    hostageAgentTemp[i] = false;
+                    hostageAgentKilledTemp[i] = true;
                     action = true;
                 } else if (x == currentNode.value.hostagesX[i] && y == currentNode.value.hostagesY[i] - 1) {
-                    currentNode.value.hostageAgent[i] = false;
-                    currentNode.value.hostageAgentKilled[i] = true;
+                    // currentNode.value.hostageAgent[i] = false;
+                    // currentNode.value.hostageAgentKilled[i] = true;
+                    hostageAgentTemp[i] = false;
+                    hostageAgentKilledTemp[i] = true;
                     currentNode.value.currentHostages--;
                     action = true;
                 } else if (x == currentNode.value.hostagesX[i] && y == currentNode.value.hostagesY[i] + 1) {
-                    currentNode.value.hostageAgent[i] = false;
-                    currentNode.value.hostageAgentKilled[i] = true;
+                    // currentNode.value.hostageAgent[i] = false;
+                    // currentNode.value.hostageAgentKilled[i] = true;
+                    hostageAgentTemp[i] = false;
+                    hostageAgentKilledTemp[i] = true;
                     currentNode.value.currentHostages--;
                     action = true;
                 }
             }
 
+        }
+        currentNode.value.agentDead = new boolean[agentDeadTemp.length];
+        for (int i = 0; i < agentDeadTemp.length; i++) {
+            currentNode.value.agentDead[i] = agentDeadTemp[i];
+        }
+        currentNode.value.hostageAgent = new boolean[hostageAgentTemp.length];
+        for (int i = 0; i < hostageAgentTemp.length; i++) {
+            currentNode.value.hostageAgent[i] = hostageAgentTemp[i];
+        }
+        currentNode.value.hostageAgentKilled = new boolean[hostageAgentKilledTemp.length];
+        for (int i = 0; i < hostageAgentKilledTemp.length; i++) {
+            currentNode.value.hostageAgentKilled[i] = hostageAgentKilledTemp[i];
         }
         if (action) {
             currentNode.value.neoDmg += 20;
@@ -589,14 +704,15 @@ public class App {
                             break;
                     }
 
-                    System.out
-                            .print(currentNode.getLevel(currentNode) + Arrays.toString(currentNode.value.hostagesDmg));
+                    // System.out
+                    // .print(currentNode.getLevel(currentNode) +
+                    // Arrays.toString(currentNode.value.hostagesDmg));
 
                 }
-                System.out.println("");
-                if (currentNode.getParent() != null)
-                    System.out.print("Parent=" + currentNode.getParent().getLevel(currentNode)
-                            + Arrays.toString(currentNode.getParent().value.hostagesDmg));
+                // System.out.println("");
+                // if (currentNode.getParent() != null)
+                // System.out.print("Parent=" + currentNode.getParent().getLevel(currentNode)
+                // + Arrays.toString(currentNode.getParent().value.hostagesDmg));
                 // System.out.println("");
                 // System.out.println(currentNode.getLevel(currentNode)+","+"root= " +
                 // currentNode.action + "," + currentNode.value.currentHostages);
@@ -614,7 +730,7 @@ public class App {
         } while (currentNode.value.currentHostages != 0);
         // }
         while (currentNode.action != "root") {
-            System.out.println(currentNode.value.currentHostages);
+             System.out.println(currentNode.value.currentHostages);
             System.out.println(currentNode.action);
             currentNode = (MyTreeNode<matrixValue>) currentNode.getParent();
         }
@@ -650,24 +766,27 @@ public class App {
     }
 
     public static void solvetest(MyTreeNode<matrixValue> tree) {
-        System.out.println(tree.value.currentHostages);
+        // System.out.println(tree.value.currentHostages);
         MyTreeNode<matrixValue> down = downFunc(tree).b;
-        System.out.println(tree.value.neoPositionX + " , " + tree.value.neoPositionY);
+        // System.out.println(tree.value.neoPositionX + " , " +
+        // tree.value.neoPositionY);
         MyTreeNode<matrixValue> fly = flyFunc(tree).b;
-        System.out.println(tree.value.neoPositionX + " , " + tree.value.neoPositionY);
+        // System.out.println(tree.value.neoPositionX + " , " +
+        // tree.value.neoPositionY);
         MyTreeNode<matrixValue> up = upFunc(tree).b;
-        System.out.println(tree.value.neoPositionX + " , " + tree.value.neoPositionY);
+        // System.out.println(tree.value.neoPositionX + " , " +
+        // tree.value.neoPositionY);
         MyTreeNode<matrixValue> carry = carryFunc(tree).b;
-        for (Boolean x : tree.value.hostagesCarried) {
-            System.out.println(x);
-        }
+        // for (Boolean x : tree.value.hostagesCarried) {
+        // System.out.println(x);
+        // }
 
         down = downFunc(tree).b;
         fly = flyFunc(tree).b;
         MyTreeNode<matrixValue> right = rightFunc(tree).b;
         up = upFunc(tree).b;
         MyTreeNode<matrixValue> drop = dropFunc(tree).b;
-        System.out.println(drop.value.currentHostages);
+        // System.out.println(drop.value.currentHostages);
         down = downFunc(tree).b;
         down = downFunc(tree).b;
         MyTreeNode<matrixValue> kill = killFunc(tree).b;
@@ -678,7 +797,7 @@ public class App {
         right = rightFunc(tree).b;
         right = rightFunc(tree).b;
         kill = killFunc(tree).b;
-        System.out.println(tree.value.currentHostages);
+        // System.out.println(tree.value.currentHostages);
 
         left = leftFunc(tree).b;
         up = upFunc(tree).b;
@@ -686,9 +805,10 @@ public class App {
         up = upFunc(tree).b;
         up = upFunc(tree).b;
         drop = dropFunc(tree).b;
-        System.out.println(tree.value.currentHostages);
+        // System.out.println(tree.value.currentHostages);
 
-        System.out.println(drop.value.neoPositionX + " , " + drop.value.neoPositionY);
+        // System.out.println(drop.value.neoPositionX + " , " +
+        // drop.value.neoPositionY);
 
     }
 
