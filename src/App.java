@@ -382,7 +382,9 @@ public class App {
             if (currentNode.value.neoPositionX == currentNode.value.hostagesX[i]
                     && currentNode.value.neoPositionY == currentNode.value.hostagesY[i]
                     && currentNode.value.carryCount < currentNode.value.cap && !currentNode.value.hostagesCarried[i]
-                    && !currentNode.value.hostageAgent[i] && !currentNode.value.hostageAgentKilled[i] && currentNode.value.hostagesX[i] != currentNode.value.telephoneX && currentNode.value.hostagesY[i] != currentNode.value.telephoneY ) {
+                    && !currentNode.value.hostageAgent[i] && !currentNode.value.hostageAgentKilled[i]
+                    && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
+                    && currentNode.value.hostagesY[i] != currentNode.value.telephoneY) {
                 hostagesCarriedTemp[i] = true;
                 currentNode.value.carryCount++;
                 action = true;
@@ -599,8 +601,10 @@ public class App {
 
             if (currentNode.value.neoDmg < 100) {
                 int[] tempDmg = new int[currentNode.value.hostagesDmg.length];
+                boolean[] agentTemp = new boolean[currentNode.value.hostageAgent.length];
                 for (int i = 0; i < tempDmg.length; i++) {
                     tempDmg[i] = currentNode.value.hostagesDmg[i];
+                    agentTemp[i] = currentNode.value.hostageAgent[i];
                 }
                 for (int i = 0; i < currentNode.value.hostagesDmg.length; i++) {
                     tempDmg[i] += 2;
@@ -610,14 +614,17 @@ public class App {
                                 && currentNode.value.hostagesX[i] != currentNode.value.telephoneX
                                 && currentNode.value.hostagesY[i] != currentNode.value.telephoneY
                                 && !currentNode.value.hostageAgentKilled[i]) {
-                            currentNode.value.hostageAgent[i] = true;
+                                    agentTemp[i] = true;
                         }
                     }
 
                 }
                 currentNode.value.hostagesDmg = new int[tempDmg.length];
+                currentNode.value.hostageAgent = new boolean[agentTemp.length];
                 for (int i = 0; i < tempDmg.length; i++) {
                     currentNode.value.hostagesDmg[i] = tempDmg[i];
+                    currentNode.value.hostageAgent[i] = agentTemp[i];
+
                 }
 
                 for (int i = 0; i < 9; i++) {
@@ -730,9 +737,18 @@ public class App {
         } while (currentNode.value.currentHostages != 0);
         // }
         while (currentNode.action != "root") {
-             System.out.println(currentNode.value.currentHostages);
+            System.out.println("----------\n" + "neoX & y= " + currentNode.value.neoPositionX + ","
+                    + currentNode.value.neoPositionY);
+            for (int i = 0; i < currentNode.value.hostageAgent.length; i++) {
+                if (currentNode.value.hostageAgent[i]) {
+                    System.out.println(currentNode.value.hostagesX[i] + "," + currentNode.value.hostagesY[i]);
+                }
+
+            }
+            System.out.println(currentNode.value.currentHostages);
             System.out.println(currentNode.action);
             currentNode = (MyTreeNode<matrixValue>) currentNode.getParent();
+
         }
     }
 

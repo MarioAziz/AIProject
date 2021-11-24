@@ -103,15 +103,20 @@ public class matrixValue implements Cloneable {
         neoDmg = x.neoDmg;
         carryCount = x.carryCount;
     }
-    public matrixValue clone(){
+
+    public matrixValue clone() {
         return new matrixValue(this);
 
     }
+
     public String hashValue() {
-        
-        return ""+carryCount + neoPositionX + neoPositionY + telephoneX + telephoneY + Arrays.toString(agentsX) +  Arrays.toString(agentsY) + Arrays.toString(pillsX)+ Arrays.toString(pillsY)
-                +  Arrays.toString(pillTaken) + Arrays.toString(padsX) +  Arrays.toString(padsY) + Arrays.toString(hostagesX) + Arrays.toString(hostagesY) +  Arrays.toString(hostagesDmg)+ currentHostages + Arrays.toString(hostagesCarried)
-                + Arrays.toString(hostageAgent) +Arrays.toString(hostageAgentKilled) +Arrays.toString(agentDead) + neoDmg;
+
+        return "" + carryCount + neoPositionX + neoPositionY + telephoneX + telephoneY + Arrays.toString(agentsX)
+                + Arrays.toString(agentsY) + Arrays.toString(pillsX) + Arrays.toString(pillsY)
+                + Arrays.toString(pillTaken) + Arrays.toString(padsX) + Arrays.toString(padsY)
+                + Arrays.toString(hostagesX) + Arrays.toString(hostagesY) + Arrays.toString(hostagesDmg)
+                + currentHostages + Arrays.toString(hostagesCarried) + Arrays.toString(hostageAgent)
+                + Arrays.toString(hostageAgentKilled) + Arrays.toString(agentDead) + neoDmg;
     }
 
 }
