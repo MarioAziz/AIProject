@@ -1,8 +1,10 @@
+package code;
 import java.util.*;
 public class MyTreeNode<T>{
     public T value = null;
+    
     public String action;
-    private List<MyTreeNode<T>> children = new ArrayList<>();
+    public List<MyTreeNode<T>> children = new ArrayList<>();
     private MyTreeNode<T> parent = null;
 
     public MyTreeNode(T value,String action) {
