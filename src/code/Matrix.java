@@ -129,7 +129,8 @@ public class Matrix {
         return outPutFirst + agentsString + outPutPills + padsString + outPutHostages;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> upFunc(MyTreeNode<String> currentNode, MyTreeNode<String> parent) {
+    public static Pair<Boolean, MyTreeNode<String>, String> upFunc(MyTreeNode<String> currentNode,
+            MyTreeNode<String> parent) {
 
         boolean left = false;
         matrixValue currentMatrix = new matrixValue(currentNode.value);
@@ -175,12 +176,13 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(left, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(left,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
 
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> downFunc(MyTreeNode<String> currentNode,
+    public static Pair<Boolean, MyTreeNode<String>, String> downFunc(MyTreeNode<String> currentNode,
             MyTreeNode<String> parent) {
 
         boolean right = false;
@@ -236,11 +238,12 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(right, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(right,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> rightFunc(MyTreeNode<String> currentNode,
+    public static Pair<Boolean, MyTreeNode<String>, String> rightFunc(MyTreeNode<String> currentNode,
             MyTreeNode<String> parent) {
 
         boolean up = false;
@@ -288,11 +291,12 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(up, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(up,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> leftFunc(MyTreeNode<String> currentNode,
+    public static Pair<Boolean, MyTreeNode<String>, String> leftFunc(MyTreeNode<String> currentNode,
             MyTreeNode<String> parent) {
 
         boolean down = false;
@@ -351,11 +355,12 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(down, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(down,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> dropFunc(MyTreeNode<String> currentNode,
+    public static Pair<Boolean, MyTreeNode<String>, String> dropFunc(MyTreeNode<String> currentNode,
             MyTreeNode<String> parent) {
 
         boolean action = false;
@@ -386,11 +391,12 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(action, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(action,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> carryFunc(MyTreeNode<String> currentNode,
+    public static Pair<Boolean, MyTreeNode<String>, String> carryFunc(MyTreeNode<String> currentNode,
             MyTreeNode<String> parent) {
 
         boolean action = false;
@@ -418,11 +424,12 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(action, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(action,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> takepillFunc(MyTreeNode<String> currentNode,
+    public static Pair<Boolean, MyTreeNode<String>, String> takepillFunc(MyTreeNode<String> currentNode,
             MyTreeNode<String> parent) {
 
         boolean action = false;
@@ -482,11 +489,12 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(action, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(action,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> killFunc(MyTreeNode<String> currentNode,
+    public static Pair<Boolean, MyTreeNode<String>, String> killFunc(MyTreeNode<String> currentNode,
             MyTreeNode<String> parent) {
         matrixValue currentMatrix = new matrixValue(currentNode.value);
         int x = currentMatrix.neoPositionX;
@@ -592,11 +600,13 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(action, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(action,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
     }
 
-    public static Pair<Boolean, MyTreeNode<String>,String> flyFunc(MyTreeNode<String> currentNode, MyTreeNode<String> parent) {
+    public static Pair<Boolean, MyTreeNode<String>, String> flyFunc(MyTreeNode<String> currentNode,
+            MyTreeNode<String> parent) {
         matrixValue currentMatrix = new matrixValue(currentNode.value);
         boolean action = false;
         for (int i = 0; i < currentMatrix.padsX.length; i += 2) {
@@ -636,7 +646,8 @@ public class Matrix {
         }
         currentNode.value = currentMatrix.hashValue();
 
-        Pair<Boolean, MyTreeNode<String>,String> balabezo = new Pair<Boolean, MyTreeNode<String>,String>(action, currentNode,currentMatrix.hashValueNodmg());
+        Pair<Boolean, MyTreeNode<String>, String> balabezo = new Pair<Boolean, MyTreeNode<String>, String>(action,
+                currentNode, currentMatrix.hashValueNodmg());
         return balabezo;
 
     }
@@ -648,7 +659,7 @@ public class Matrix {
         String currentString = queue.peek().value;
         matrixValue matrixValue = new matrixValue(currentString);
         MyTreeNode<String> currentNode = queue.peek();
-        hash.add(currentString);
+        hash.add(currentString + currentNode.action);
         do {
             counter++;
             currentNode = queue.remove();
@@ -701,75 +712,75 @@ public class Matrix {
                     MyTreeNode<String> temp = new MyTreeNode<String>((tempMatrix.hashValue()), actions[i]);
                     switch (temp.action) {
                         case "up":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair = upFunc(temp, parent);
-                            if (outPair.a && !hash.contains(outPair.c)) {
-                                hash.add(outPair.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair = upFunc(temp, parent);
+                            if (outPair.a && !hash.contains(outPair.c + temp.action)) {
+                                hash.add(outPair.c + temp.action);
                                 currentNode.addChild(outPair.b);
                                 queue.add(outPair.b);
                             }
                             break;
                         case "down":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair2 = downFunc(temp, parent);
-                            if (outPair2.a && !hash.contains(outPair2.c)) {
-                                hash.add(outPair2.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair2 = downFunc(temp, parent);
+                            if (outPair2.a && !hash.contains(outPair2.c + temp.action)) {
+                                hash.add(outPair2.c + temp.action);
                                 currentNode.addChild(outPair2.b);
                                 queue.add(outPair2.b);
                             }
                             break;
                         case "left":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair3 = leftFunc(temp, parent);
-                            if (outPair3.a && !hash.contains(outPair3.c)) {
-                                hash.add(outPair3.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair3 = leftFunc(temp, parent);
+                            if (outPair3.a && !hash.contains(outPair3.c + temp.action)) {
+                                hash.add(outPair3.c + temp.action);
                                 currentNode.addChild(outPair3.b);
                                 queue.add(outPair3.b);
                             }
                             break;
                         case "right":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair4 = rightFunc(temp, parent);
-                            if (outPair4.a && !hash.contains(outPair4.c)) {
-                                hash.add(outPair4.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair4 = rightFunc(temp, parent);
+                            if (outPair4.a && !hash.contains(outPair4.c + temp.action)) {
+                                hash.add(outPair4.c + temp.action);
                                 currentNode.addChild(outPair4.b);
                                 queue.add(outPair4.b);
                             }
                             break;
                         case "carry":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair5 = carryFunc(temp, parent);
-                            if (outPair5.a && !hash.contains(outPair5.c)) {
-                                hash.add(outPair5.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair5 = carryFunc(temp, parent);
+                            if (outPair5.a && !hash.contains(outPair5.c + temp.action)) {
+                                hash.add(outPair5.c + temp.action);
                                 currentNode.addChild(outPair5.b);
                                 queue.add(outPair5.b);
                             }
                             break;
                         case "drop":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair6 = dropFunc(temp, parent);
-                            if (outPair6.a && !hash.contains(outPair6.c)) {
-                                hash.add(outPair6.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair6 = dropFunc(temp, parent);
+                            if (outPair6.a && !hash.contains(outPair6.c + temp.action)) {
+                                hash.add(outPair6.c + temp.action);
                                 currentNode.addChild(outPair6.b);
                                 queue.add(outPair6.b);
 
                             }
                             break;
                         case "takePill":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair7 = takepillFunc(temp, parent);
-                            if (outPair7.a && !hash.contains(outPair7.c)) {
-                                hash.add(outPair7.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair7 = takepillFunc(temp, parent);
+                            if (outPair7.a && !hash.contains(outPair7.c + temp.action)) {
+                                hash.add(outPair7.c + temp.action);
                                 currentNode.addChild(outPair7.b);
                                 queue.add(outPair7.b);
 
                             }
                             break;
                         case "kill":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair8 = killFunc(temp, parent);
-                            if (outPair8.a && !hash.contains(outPair8.c)) {
-                                hash.add(outPair8.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair8 = killFunc(temp, parent);
+                            if (outPair8.a && !hash.contains(outPair8.c + temp.action)) {
+                                hash.add(outPair8.c + temp.action);
                                 currentNode.addChild(outPair8.b);
                                 queue.add(outPair8.b);
                             }
                             break;
                         case "fly":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair9 = flyFunc(temp, parent);
-                            if (outPair9.a && !hash.contains(outPair9.c)) {
-                                hash.add(outPair9.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair9 = flyFunc(temp, parent);
+                            if (outPair9.a && !hash.contains(outPair9.c + temp.action)) {
+                                hash.add(outPair9.c + temp.action);
                                 currentNode.addChild(outPair9.b);
                                 queue.add(outPair9.b);
                             }
@@ -880,75 +891,75 @@ public class Matrix {
                     // temp.setParent(parent);
                     switch (temp.action) {
                         case "up":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair = upFunc(temp, parent);
-                            if (outPair.a && !hash.contains(outPair.c)) {
-                                hash.add(outPair.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair = upFunc(temp, parent);
+                            if (outPair.a && !hash.contains(outPair.c + temp.action)) {
+                                hash.add(outPair.c + temp.action);
                                 currentNode.addChild(outPair.b);
                                 queue.addFirst(outPair.b);
                             }
                             break;
                         case "down":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair2 = downFunc(temp, parent);
-                            if (outPair2.a && !hash.contains(outPair2.c)) {
-                                hash.add(outPair2.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair2 = downFunc(temp, parent);
+                            if (outPair2.a && !hash.contains(outPair2.c + temp.action)) {
+                                hash.add(outPair2.c + temp.action);
                                 currentNode.addChild(outPair2.b);
                                 queue.addFirst(outPair2.b);
                             }
                             break;
                         case "left":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair3 = leftFunc(temp, parent);
-                            if (outPair3.a && !hash.contains(outPair3.c)) {
-                                hash.add(outPair3.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair3 = leftFunc(temp, parent);
+                            if (outPair3.a && !hash.contains(outPair3.c + temp.action)) {
+                                hash.add(outPair3.c + temp.action);
                                 currentNode.addChild(outPair3.b);
                                 queue.addFirst(outPair3.b);
                             }
                             break;
                         case "right":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair4 = rightFunc(temp, parent);
-                            if (outPair4.a && !hash.contains(outPair4.c)) {
-                                hash.add(outPair4.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair4 = rightFunc(temp, parent);
+                            if (outPair4.a && !hash.contains(outPair4.c + temp.action)) {
+                                hash.add(outPair4.c + temp.action);
                                 currentNode.addChild(outPair4.b);
                                 queue.addFirst(outPair4.b);
                             }
                             break;
                         case "carry":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair5 = carryFunc(temp, parent);
-                            if (outPair5.a && !hash.contains(outPair5.c)) {
-                                hash.add(outPair5.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair5 = carryFunc(temp, parent);
+                            if (outPair5.a && !hash.contains(outPair5.c + temp.action)) {
+                                hash.add(outPair5.c + temp.action);
                                 currentNode.addChild(outPair5.b);
                                 queue.addFirst(outPair5.b);
                             }
                             break;
                         case "drop":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair6 = dropFunc(temp, parent);
-                            if (outPair6.a && !hash.contains(outPair6.c)) {
-                                hash.add(outPair6.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair6 = dropFunc(temp, parent);
+                            if (outPair6.a && !hash.contains(outPair6.c + temp.action)) {
+                                hash.add(outPair6.c + temp.action);
                                 currentNode.addChild(outPair6.b);
                                 queue.addFirst(outPair6.b);
 
                             }
                             break;
                         case "takePill":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair7 = takepillFunc(temp, parent);
-                            if (outPair7.a && !hash.contains(outPair7.c)) {
-                                hash.add(outPair7.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair7 = takepillFunc(temp, parent);
+                            if (outPair7.a && !hash.contains(outPair7.c + temp.action)) {
+                                hash.add(outPair7.c + temp.action);
                                 currentNode.addChild(outPair7.b);
                                 queue.addFirst(outPair7.b);
 
                             }
                             break;
                         case "kill":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair8 = killFunc(temp, parent);
-                            if (outPair8.a && !hash.contains(outPair8.c)) {
-                                hash.add(outPair8.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair8 = killFunc(temp, parent);
+                            if (outPair8.a && !hash.contains(outPair8.c + temp.action)) {
+                                hash.add(outPair8.c + temp.action);
                                 currentNode.addChild(outPair8.b);
                                 queue.addFirst(outPair8.b);
                             }
                             break;
                         case "fly":
-                            Pair<Boolean, MyTreeNode<String>,String> outPair9 = flyFunc(temp, parent);
-                            if (outPair9.a && !hash.contains(outPair9.c)) {
-                                hash.add(outPair9.c);
+                            Pair<Boolean, MyTreeNode<String>, String> outPair9 = flyFunc(temp, parent);
+                            if (outPair9.a && !hash.contains(outPair9.c + temp.action)) {
+                                hash.add(outPair9.c + temp.action);
                                 currentNode.addChild(outPair9.b);
                                 queue.addFirst(outPair9.b);
                             }
