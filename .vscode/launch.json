@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Matrix",
+            "request": "launch",
+            "mainClass": "code.Matrix",
+            "projectName": "AIProject_50cfc16f"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

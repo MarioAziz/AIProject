@@ -279,6 +279,40 @@ public class matrixValue implements Cloneable {
 
     }
 
+    public int agentsCount() {
+        int out = 0;
+        for (int i = 0; i < agentDead.length; i++) {
+            if (!agentDead[i]) {
+                out++;
+            }
+        }
+        return out;
+    }
+
+    public int pillCount() {
+        int out = 0;
+        for (int i = 0; i < pillTaken.length; i++) {
+            if (!pillTaken[i]) {
+                out++;
+            }
+        }
+        return out;
+    }
+
+    public int deathCount() {
+        int out = 0;
+        for (int i = 0; i < agentDead.length; i++) {
+            if (agentDead[i]) {
+                out++;
+            }
+            if (hostageAgentKilled[i]) {
+                out++;
+            }
+
+        }
+        return out;
+    }
+
     public String hashValue() {
 
         return "" + gridSizeX + ";" + gridSizeY + ";" + cap + ";" + neoPositionX + ";" + neoPositionY + ";" + telephoneX
@@ -297,9 +331,9 @@ public class matrixValue implements Cloneable {
                 + ";" + telephoneY + ";" + Arrays.toString(agentsX) + ";" + Arrays.toString(agentsY) + ";"
                 + Arrays.toString(pillsX) + ";" + Arrays.toString(pillsY) + ";" + Arrays.toString(pillTaken) + ";"
                 + Arrays.toString(padsX) + ";" + Arrays.toString(padsY) + ";" + Arrays.toString(hostagesX) + ";"
-                + Arrays.toString(hostagesY) + ";" + currentHostages + ";" + Arrays.toString(hostagesCarried) + ";"
+                + Arrays.toString(hostagesY) + ";" + Arrays.toString(hostagesDmg) + ";" + currentHostages + ";" + Arrays.toString(hostagesCarried) + ";"
                 + Arrays.toString(hostageAgent) + ";" + Arrays.toString(hostageAgentKilled) + ";"
-                + Arrays.toString(agentDead) + ";" + neoDmg + ";" + carryCount;
+                + Arrays.toString(agentDead) + ";" + neoDmg + ";" + carryCount+ ";"+  agentsCount()+ ";"+pillCount();
     }
 
 }

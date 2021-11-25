@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Matrix {
     public static String[] actions = { "up", "down", "left", "right", "carry", "drop", "takePill", "kill", "fly" };
+    //public static String[] actions = { "fly", "kill", "takePill", "drop", "carry", "right", "left", "down", "up" };
     // public static Queue<MyTreeNode<String>> queue;
 
     public static String genGrid() {
@@ -370,7 +371,7 @@ public class Matrix {
         for (int i = 0; i < hostagesCarriedTemp.length; i++) {
             hostagesCarriedTemp[i] = currentMatrix.hostagesCarried[i];
         }
-        // If the hostage returned to the telehpone booth
+        // If the hostage returned to the telehpone booth, drop all hostages that neo is carrying
         for (int i = 0; i < currentMatrix.hostagesX.length; i++) {
             if (hostagesCarriedTemp[i]) {
                 if (currentMatrix.neoPositionX == currentMatrix.telephoneX
@@ -445,8 +446,8 @@ public class Matrix {
         }
         for (int i = 0; i < currentMatrix.pillsX.length; i++) {
             if (currentMatrix.neoPositionX == currentMatrix.pillsX[i]
-                    && currentMatrix.neoPositionY == currentMatrix.pillsY[i] && !currentMatrix.pillTaken[i]
-                    && currentMatrix.hostagesDmg[i] != 100) {
+                    && currentMatrix.neoPositionY == currentMatrix.pillsY[i] && !currentMatrix.pillTaken[i]) {
+                        // && currentMatrix.hostagesDmg[i] != 100
                 currentMatrix.neoDmg -= 20;
                 action = true;
                 pillTakenTemp[i] = true;
@@ -659,7 +660,8 @@ public class Matrix {
         String currentString = queue.peek().value;
         matrixValue matrixValue = new matrixValue(currentString);
         MyTreeNode<String> currentNode = queue.peek();
-        hash.add(currentString + currentNode.action);
+        hash.add(matrixValue.hashValueNodmg() + currentNode.action);
+        boolean loopCheck=true;
         do {
             counter++;
             currentNode = queue.remove();
@@ -791,7 +793,12 @@ public class Matrix {
                     }
                 }
             }
-        } while (matrixValue.currentHostages != 0);
+            if(matrixValue.currentHostages == 0 ){
+                if(matrixValue.neoPositionX==matrixValue.telephoneX && matrixValue.neoPositionY==matrixValue.telephoneY){
+                    loopCheck=false;
+                }
+            }
+        } while (loopCheck);
         // }
         String output = "";
         int hostageDead = 0;
@@ -802,6 +809,11 @@ public class Matrix {
             }
         }
         for (boolean dmg : matrixValue.agentDead) {
+            if (dmg) {
+                agentDead++;
+            }
+        }
+        for (boolean dmg : matrixValue.hostageAgentKilled) {
             if (dmg) {
                 agentDead++;
             }
@@ -842,13 +854,12 @@ public class Matrix {
     public static String dfs(Queue<MyTreeNode<String>> queueold) throws InterruptedException {
         int counter = 0;
         HashSet<String> hash = new HashSet<>();
-
         String currentString = queueold.peek().value;
         matrixValue currentMatrix = new matrixValue(currentString);
         hash.add(currentMatrix.hashValueNodmg());
         LinkedList<MyTreeNode<String>> queue = new LinkedList<>();
         queue.addFirst(queueold.remove());
-
+        boolean loopCheck=true;
         MyTreeNode<String> currentNode = queue.peek();
         do {
             counter++;
@@ -970,7 +981,12 @@ public class Matrix {
                     }
                 }
             }
-        } while (currentMatrix.currentHostages != 0);
+            if(currentMatrix.currentHostages == 0 ){
+                if(currentMatrix.neoPositionX==currentMatrix.telephoneX && currentMatrix.neoPositionY==currentMatrix.telephoneY){
+                    loopCheck=false;
+                }
+            }
+        } while (loopCheck);
         // }
         String output = "";
         int hostageDead = 0;
@@ -981,6 +997,11 @@ public class Matrix {
             }
         }
         for (boolean dmg : currentMatrix.agentDead) {
+            if (dmg) {
+                agentDead++;
+            }
+        }
+        for (boolean dmg : currentMatrix.hostageAgentKilled) {
             if (dmg) {
                 agentDead++;
             }
@@ -1034,10 +1055,13 @@ public class Matrix {
         String grid1 = "5,5;1;1,4;1,0;0,4;0,0,2,2;3,4,4,2,4,2,3,4;0,2,32,0,1,38";
         String grid3 = "6,6;2;2,4;2,2;0,4,1,4,3,0,4,2;0,1,1,3;4,4,3,1,3,1,4,4;0,0,94,1,2,38,4,1,76,4,0,80";
         String grid5 = "5,5;2;0,4;3,4;3,1,1,1;2,3;3,0,0,1,0,1,3,0;4,2,54,4,0,85,1,0,43";
+        String grid0 = "5,5;2;3,4;1,2;0,3,1,4;2,3;4,4,0,2,0,2,4,4;2,2,91,2,4,62";
+        String grid9 = "5,5;2;0,4;1,4;0,1,1,1,2,1,3,1,3,3,3,4;1,0,2,4;0,3,4,3,4,3,0,3;0,0,30,3,0,80,4,4,80";
+
 
         // solve(grid1, "BFS", false);
         // System.out.println("hi");
-        String out = solve(grid5, "DF", false);
+        String out = solve(grid1, "DF", false);
         System.out.println(out);
 
         // }
